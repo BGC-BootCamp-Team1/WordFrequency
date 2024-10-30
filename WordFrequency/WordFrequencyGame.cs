@@ -42,21 +42,9 @@ namespace WordFrequency
 
         private Dictionary<string, int> GetListMap(List<Input> inputList)
         {
-            Dictionary<string, int> map = new Dictionary<string, int>();
-            foreach (var input in inputList)
-            {
-                //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-                if (!map.ContainsKey(input.Value))
-                {
-                    map[input.Value] = 1;
-                }
-                else
-                {
-                    map[input.Value]++;
-                }
-            }
-
-            return map;
+            return inputList
+            .GroupBy(input => input.Value)
+            .ToDictionary(group => group.Key, group => group.Count());
         }
     }
 }
