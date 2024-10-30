@@ -7,31 +7,31 @@ namespace WordFrequency
         public string GetResult(string inputStr)
         {
             //split the input string with 1 to n pieces of spaces
-            string[] arr = Regex.Split(inputStr, @"\s+");
+            string[] splitWordsList = Regex.Split(inputStr, @"\s+");
 
-            List<Input> inputList = new List<Input>();
-            foreach (var s in arr)
+            List<WordFrequency> inputList = new List<WordFrequency>();
+            foreach (var s in splitWordsList)
             {
-                var existingInput = inputList.Find(input => input.Value == s);
+                var existingInput = inputList.Find(input => input.Word == s);
                 if (existingInput != null)
                 {
-                    existingInput.AddOneCount();
+                    existingInput.IncrementFrequency();
                 }
                 else
                 {
-                    Input input = new(s, 1);
+                    WordFrequency input = new(s, 1);
                     inputList.Add(input);
                 }
             }
 
-            inputList.Sort((w1, w2) => w2.WordCount - w1.WordCount);
+            inputList.Sort((w1, w2) => w2.Frequency - w1.Frequency);
 
             List<string> strList = new List<string>();
 
             //stringJoiner joiner = new stringJoiner("\n");
-            foreach (Input w in inputList)
+            foreach (WordFrequency w in inputList)
             {
-                string s = w.Value + " " + w.WordCount;
+                string s = w.Word + " " + w.Frequency;
                 strList.Add(s);
             }
 
