@@ -24,16 +24,7 @@ namespace WordFrequency
 
         private static string BuildResultString(List<Input> inputList)
         {
-            List<string> strList = new List<string>();
-
-            //stringJoiner joiner = new stringJoiner("\n");
-            foreach (Input w in inputList)
-            {
-                string s = w.Value + " " + w.WordCount;
-                strList.Add(s);
-            }
-
-            return string.Join("\n", strList.ToArray());
+            return string.Join("\n", inputList.Select(w => $"{w.Value} {w.WordCount}"));
         }
 
         private static List<Input> ConvertMapToList(Dictionary<string, int> map)
