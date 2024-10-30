@@ -16,7 +16,7 @@
             get { return this._value; }
         }
 
-        public int WordCount
+        public int Count
         {
             get { return this._count; }
         }
