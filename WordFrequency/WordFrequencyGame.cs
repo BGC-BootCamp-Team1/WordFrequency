@@ -11,20 +11,20 @@ namespace WordFrequency
             //split the input string with 1 to n pieces of spaces
             string[] arr = Regex.Split(inputStr, @"\s+");
 
-            List<Input> inputList = new List<Input>();
+            List<WordCountPair> inputList = new List<WordCountPair>();
             foreach (var s in arr)
             {
-                Input input = new Input(s, 1);
+                WordCountPair input = new WordCountPair(s, 1);
                 inputList.Add(input);
             }
 
             //get the map for the next step of sizing the same word
-            Dictionary<string, List<Input>> map = GetListMap(inputList);
+            Dictionary<string, List<WordCountPair>> map = GetListMap(inputList);
 
-            List<Input> list = new List<Input>();
+            List<WordCountPair> list = new List<WordCountPair>();
             foreach (var entry in map)
             {
-                Input input = new Input(entry.Key, entry.Value.Count);
+                WordCountPair input = new WordCountPair(entry.Key, entry.Value.Count);
                 list.Add(input);
             }
 
@@ -35,7 +35,7 @@ namespace WordFrequency
             List<string> strList = new List<string>();
 
             //stringJoiner joiner = new stringJoiner("\n");
-            foreach (Input w in inputList)
+            foreach (WordCountPair w in inputList)
             {
                 string s = w.Value + " " + w.WordCount;
                 strList.Add(s);
@@ -44,15 +44,15 @@ namespace WordFrequency
             return string.Join("\n", strList.ToArray());
         }
 
-        private Dictionary<string, List<Input>> GetListMap(List<Input> inputList)
+        private Dictionary<string, List<WordCountPair>> GetListMap(List<WordCountPair> inputList)
         {
-            Dictionary<string, List<Input>> map = new Dictionary<string, List<Input>>();
+            Dictionary<string, List<WordCountPair>> map = new Dictionary<string, List<WordCountPair>>();
             foreach (var input in inputList)
             {
                 //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
                 if (!map.ContainsKey(input.Value))
                 {
-                    List<Input> arr = new List<Input>();
+                    List<WordCountPair> arr = new List<WordCountPair>();
                     arr.Add(input);
                     map.Add(input.Value, arr);
                 }
