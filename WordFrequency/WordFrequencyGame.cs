@@ -14,15 +14,7 @@ namespace WordFrequency
             }
             else
             {
-                //split the input string with 1 to n pieces of spaces
-                string[] arr = Regex.Split(inputStr, @"\s+");
-
-                List<Input> inputList = new List<Input>();
-                foreach (var s in arr)
-                {
-                    Input input = new Input(s, 1);
-                    inputList.Add(input);
-                }
+                List<Input> inputList = SplitInputStr(inputStr);
 
                 //get the map for the next step of sizing the same word
                 Dictionary<string, List<Input>> map = GetListMap(inputList);
@@ -49,6 +41,21 @@ namespace WordFrequency
 
                 return string.Join("\n", strList.ToArray());
             }
+        }
+
+        private static List<Input> SplitInputStr(string inputStr)
+        {
+            //split the input string with 1 to n pieces of spaces
+            string[] arr = Regex.Split(inputStr, @"\s+");
+
+            List<Input> inputList = new List<Input>();
+            foreach (var s in arr)
+            {
+                Input input = new Input(s, 1);
+                inputList.Add(input);
+            }
+
+            return inputList;
         }
 
         private Dictionary<string, List<Input>> GetListMap(List<Input> inputList)
