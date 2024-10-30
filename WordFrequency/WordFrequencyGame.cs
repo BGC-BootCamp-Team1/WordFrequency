@@ -8,9 +8,9 @@ namespace WordFrequency
     {
         private const string SPLIT_PATTERN = @"\s+";
 
-        public string GetResult(string inputStr)
+        public string GetResult(string inputText)
         {
-            List<Input> inputList = SplitInputStr(inputStr);
+            List<Input> inputList = SplitInputStr(inputText);
 
             //get the map for the next step of sizing the same word
             Dictionary<string, int> map = GetListMap(inputList);
