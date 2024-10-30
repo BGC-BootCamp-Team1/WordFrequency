@@ -6,43 +6,52 @@ namespace WordFrequency;
 
 public class WordFrequencyGame
 {
+    private static string SplitInputString(string inputStr, out string[] arr)
+    {
+        arr = Regex.Split(inputStr, @"\s+");
+        if (arr.Length == 1)
+        {
+            return $"{arr[0]} 1";
+        }
+
+        return "";
+
+    }
     public string GetResult(string inputStr)
     {
-        if (Regex.Split(inputStr, @"\s+").Length == 1)
+
+        
+        string[] arr;
+        SplitInputString(inputStr, out arr);
+
+        List<WordCount>wordCounts = new List<WordCount>();
+        foreach (var s in arr)
         {
-            return inputStr + " 1";
+            wordCounts.Add(new WordCount(s, 1));
         }
-        else
+
+        // Get the map for the next step of sizing the same word
+        Dictionary<string, int> wordCountMap = GetWordCountMap(wordCounts);
+
+        List<WordCount> resultList = new List<WordCount>();
+        foreach (var entry in wordCountMap)
         {
-            // Split the input string with 1 to n pieces of spaces
-            string[] arr = Regex.Split(inputStr, @"\s+");
-
-            List<WordCount> wordCounts = new List<WordCount>();
-            foreach (var s in arr)
-            {
-                wordCounts.Add(new WordCount(s, 1));
-            }
-
-            // Get the map for the next step of sizing the same word
-            Dictionary<string, int> wordCountMap = GetWordCountMap(wordCounts);
-
-            List<WordCount> resultList = new List<WordCount>();
-            foreach (var entry in wordCountMap)
-            {
-                resultList.Add(new WordCount(entry.Key, entry.Value));
-            }
-
-            resultList.Sort((w1, w2) => w2.Count - w1.Count);
-
-            List<string> strList = new List<string>();
-            foreach (WordCount wc in resultList)
-            {
-                strList.Add($"{wc.Word} {wc.Count}");
-            }
-
-            return string.Join("\n", strList);
+            resultList.Add(new WordCount(entry.Key, entry.Value));
         }
+
+        resultList.Sort((w1, w2) => w2.Count - w1.Count);
+
+        List<string> strList = new List<string>();
+        foreach (WordCount wc in resultList)
+        {
+            strList.Add($"{wc.Word} {wc.Count}");
+        }
+
+        return string.Join("\n", strList);
+
     }
+
+    
 
     private Dictionary<string, int> GetWordCountMap(List<WordCount> wordCounts)
     {
