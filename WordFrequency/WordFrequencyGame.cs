@@ -12,30 +12,22 @@ namespace WordFrequency
             string[] arr = Regex.Split(inputStr, @"\s+");
 
             List<WordCountPair> inputList = new List<WordCountPair>();
-            foreach (var s in arr)
-            {
-                WordCountPair input = new WordCountPair(s, 1);
-                inputList.Add(input);
-            }
+            
+            inputList.AddRange(arr.Select(s => new WordCountPair(s, 1)));
 
             //get the map for the next step of sizing the same word
             Dictionary<string, List<WordCountPair>> map = GetListMap(inputList);
 
             List<WordCountPair> list = new List<WordCountPair>();
-            foreach (var entry in map)
-            {
-                WordCountPair input = new WordCountPair(entry.Key, entry.Value.Count);
-                list.Add(input);
-            }
 
-            inputList = list;
+            list.AddRange(map.Select(entry => new WordCountPair(entry.Key, entry.Value.Count)));
 
-            inputList.Sort((w1, w2) => w2.Count - w1.Count);
+            list.Sort((w1, w2) => w2.Count - w1.Count);
 
             List<string> strList = new List<string>();
 
             //stringJoiner joiner = new stringJoiner("\n");
-            foreach (WordCountPair w in inputList)
+            foreach (WordCountPair w in list)
             {
                 string s = w.Value + " " + w.Count;
                 strList.Add(s);
