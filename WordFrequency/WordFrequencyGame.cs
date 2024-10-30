@@ -14,16 +14,16 @@ namespace WordFrequency
 
         private static List<Input> Resort(Dictionary<string, List<Input>> map)
         {
-            List<Input> list = map.Select( entry => new Input(entry.Key, entry.Value.Count))
-                .ToList();
+            List<Input> list = map.Select( entry => new Input(entry.Key, entry.Value.Count)).ToList();
             list.Sort((w1, w2) => w2.WordCount - w1.WordCount);
             return list;
         }
 
         private static List<Input> SplitWithSpaces(string inputStr)
         {
-            string[] arr = Regex.Split(inputStr, @"\s+");
-            return arr.Select( s => new Input(s, 1)).ToList();
+            return Regex.Split(inputStr, @"\s+")
+                .Select( s => new Input(s, 1))
+                .ToList();
         }
 
         private static string GenerateOutputString(List<Input> inputList)
