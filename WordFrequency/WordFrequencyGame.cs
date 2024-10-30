@@ -13,12 +13,12 @@ namespace WordFrequency
             List<Input> inputList = SplitInputStr(inputStr);
 
             //get the map for the next step of sizing the same word
-            Dictionary<string, List<Input>> map = GetListMap(inputList);
+            Dictionary<string, int> map = GetListMap(inputList);
 
             List<Input> list = new List<Input>();
             foreach (var entry in map)
             {
-                Input input = new Input(entry.Key, entry.Value.Count);
+                Input input = new Input(entry.Key, entry.Value);
                 list.Add(input);
             }
 
@@ -54,21 +54,19 @@ namespace WordFrequency
             return inputList;
         }
 
-        private Dictionary<string, List<Input>> GetListMap(List<Input> inputList)
+        private Dictionary<string, int> GetListMap(List<Input> inputList)
         {
-            Dictionary<string, List<Input>> map = new Dictionary<string, List<Input>>();
+            Dictionary<string, int> map = new Dictionary<string, int>();
             foreach (var input in inputList)
             {
                 //       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
                 if (!map.ContainsKey(input.Value))
                 {
-                    List<Input> arr = new List<Input>();
-                    arr.Add(input);
-                    map.Add(input.Value, arr);
+                    map[input.Value] = 1;
                 }
                 else
                 {
-                    map[input.Value].Add(input);
+                    map[input.Value]++;
                 }
             }
 
