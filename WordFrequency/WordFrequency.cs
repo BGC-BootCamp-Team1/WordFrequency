@@ -3,28 +3,18 @@ namespace WordFrequency
 {
     public class WordFrequency
     {
-        private string word;
-        private int frequency;
+        public string Word { get; private set; }
+        public int Frequency { get; private set; }
 
-        public WordFrequency(string w, int i)
+        public WordFrequency(string word)
         {
-            this.word = w;
-            this.frequency = i;
-        }
-
-        public string Word
-        {
-            get { return this.word; }
-        }
-
-        public int Frequency
-        {
-            get { return this.frequency; }
+            this.Word = word;
+            this.Frequency = 1;
         }
 
         internal void IncrementFrequency()
         {
-            this.frequency++;
+            this.Frequency++;
         }
     }
 }

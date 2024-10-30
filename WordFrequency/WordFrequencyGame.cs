@@ -19,7 +19,7 @@ namespace WordFrequency
                 }
                 else
                 {
-                    WordFrequency input = new(s, 1);
+                    WordFrequency input = new(s);
                     inputList.Add(input);
                 }
             }
