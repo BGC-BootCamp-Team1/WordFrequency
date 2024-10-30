@@ -10,39 +10,33 @@ namespace WordFrequency
 
         public string GetResult(string inputStr)
         {
-            if (Regex.Split(inputStr, SPLIT_PATTERN).Length == 1)
+            List<Input> inputList = SplitInputStr(inputStr);
+
+            //get the map for the next step of sizing the same word
+            Dictionary<string, List<Input>> map = GetListMap(inputList);
+
+            List<Input> list = new List<Input>();
+            foreach (var entry in map)
             {
-                return inputStr + " 1";
+                Input input = new Input(entry.Key, entry.Value.Count);
+                list.Add(input);
             }
-            else
+
+            inputList = list;
+
+            inputList.Sort((w1, w2) => w2.WordCount - w1.WordCount);
+
+            List<string> strList = new List<string>();
+
+            //stringJoiner joiner = new stringJoiner("\n");
+            foreach (Input w in inputList)
             {
-                List<Input> inputList = SplitInputStr(inputStr);
-
-                //get the map for the next step of sizing the same word
-                Dictionary<string, List<Input>> map = GetListMap(inputList);
-
-                List<Input> list = new List<Input>();
-                foreach (var entry in map)
-                {
-                    Input input = new Input(entry.Key, entry.Value.Count);
-                    list.Add(input);
-                }
-
-                inputList = list;
-
-                inputList.Sort((w1, w2) => w2.WordCount - w1.WordCount);
-
-                List<string> strList = new List<string>();
-
-                //stringJoiner joiner = new stringJoiner("\n");
-                foreach (Input w in inputList)
-                {
-                    string s = w.Value + " " + w.WordCount;
-                    strList.Add(s);
-                }
-
-                return string.Join("\n", strList.ToArray());
+                string s = w.Value + " " + w.WordCount;
+                strList.Add(s);
             }
+
+            return string.Join("\n", strList.ToArray());
+
         }
 
         private static List<Input> SplitInputStr(string inputStr)
