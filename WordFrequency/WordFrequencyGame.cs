@@ -13,11 +13,15 @@ namespace WordFrequency
             List<Input> inputList = SplitInputStr(inputText);
             Dictionary<string, int> map = GetListMap(inputList);
             inputList = ConvertMapToList(map);
-
-            inputList.Sort((w1, w2) => w2.WordCount - w1.WordCount);
+            SortInputList(inputList);
 
             return BuildResultString(inputList);
 
+        }
+
+        private static void SortInputList(List<Input> inputList)
+        {
+            inputList.Sort((w1, w2) => w2.WordCount - w1.WordCount);
         }
 
         private static string BuildResultString(List<Input> inputList)
