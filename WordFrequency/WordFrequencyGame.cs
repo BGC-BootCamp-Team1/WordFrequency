@@ -14,15 +14,7 @@ namespace WordFrequency
 
             //get the map for the next step of sizing the same word
             Dictionary<string, int> map = GetListMap(inputList);
-
-            List<Input> list = new List<Input>();
-            foreach (var entry in map)
-            {
-                Input input = new Input(entry.Key, entry.Value);
-                list.Add(input);
-            }
-
-            inputList = list;
+            inputList = ConvertMapToList(map);
 
             inputList.Sort((w1, w2) => w2.WordCount - w1.WordCount);
 
@@ -37,6 +29,20 @@ namespace WordFrequency
 
             return string.Join("\n", strList.ToArray());
 
+        }
+
+        private static List<Input> ConvertMapToList(Dictionary<string, int> map)
+        {
+            List<Input> inputList;
+            List<Input> list = new List<Input>();
+            foreach (var entry in map)
+            {
+                Input input = new Input(entry.Key, entry.Value);
+                list.Add(input);
+            }
+
+            inputList = list;
+            return inputList;
         }
 
         private static List<Input> SplitInputStr(string inputStr)
