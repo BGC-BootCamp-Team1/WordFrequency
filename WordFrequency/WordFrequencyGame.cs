@@ -8,7 +8,7 @@ namespace WordFrequency
     {
         private const string SPLIT_PATTERN = @"\s+";
 
-        public string GetResult(string inputText)
+        public string CalculateWordFrequency(string inputText)
         {
             List<Input> inputList = SplitInputStr(inputText);
             Dictionary<string, int> map = GetListMap(inputList);
