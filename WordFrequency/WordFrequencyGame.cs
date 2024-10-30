@@ -9,33 +9,32 @@ namespace WordFrequency
             //split the input string with 1 to n pieces of spaces
             string[] splitWordsList = Regex.Split(inputStr, @"\s+");
 
-            List<WordFrequency> inputList = new List<WordFrequency>();
-            foreach (var s in splitWordsList)
+            List<WordFrequency> wordFrequencyList = new List<WordFrequency>();
+            foreach (var word in splitWordsList)
             {
-                var existingInput = inputList.Find(input => input.Word == s);
+                var existingInput = wordFrequencyList.Find(input => input.Word == word);
                 if (existingInput != null)
                 {
                     existingInput.IncrementFrequency();
                 }
                 else
                 {
-                    WordFrequency input = new(s);
-                    inputList.Add(input);
+                    wordFrequencyList.Add(new(word));
                 }
             }
 
-            inputList.Sort((w1, w2) => w2.Frequency - w1.Frequency);
+            wordFrequencyList.Sort((w1, w2) => w2.Frequency - w1.Frequency);
 
-            List<string> strList = new List<string>();
+            List<string> outputStr = new List<string>();
 
             //stringJoiner joiner = new stringJoiner("\n");
-            foreach (WordFrequency w in inputList)
+            foreach (WordFrequency w in wordFrequencyList)
             {
                 string s = w.Word + " " + w.Frequency;
-                strList.Add(s);
+                outputStr.Add(s);
             }
 
-            return string.Join("\n", strList.ToArray());
+            return string.Join("\n", outputStr.ToArray());
         }
 
     }
