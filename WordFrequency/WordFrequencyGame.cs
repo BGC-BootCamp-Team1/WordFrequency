@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace WordFrequency
 {
@@ -12,23 +10,14 @@ namespace WordFrequency
         {
             string[] arr = Regex.Split(inputStr, SPLIT_PATTERN);
 
-            List<WordCountPair> inputList = new List<WordCountPair>();
-            
-            inputList.AddRange(arr.Select(s => new WordCountPair(s, 1)));
+            var inputList = arr.Select(s => new WordCountPair(s, 1)).ToList();
 
-            Dictionary<string, List<WordCountPair>> map = GetListMap(inputList);
+            var list = GetListMap(inputList)
+                .Select(entry => new WordCountPair(entry.Key, entry.Value.Count))
+                .OrderByDescending(w => w.Count)
+                .ToList();
 
-            List<WordCountPair> list = new List<WordCountPair>();
-
-            list.AddRange(map.Select(entry => new WordCountPair(entry.Key, entry.Value.Count)));
-
-            list.Sort((w1, w2) => w2.Count - w1.Count);
-
-            List<string> strList = new List<string>();
-
-            strList.AddRange(list.Select(w => $"{w.Value} {w.Count}"));
-
-            return string.Join("\n", strList.ToArray());
+            return string.Join("\n", list.Select(w => $"{w.Value} {w.Count}"));
         }
 
         private Dictionary<string, List<WordCountPair>> GetListMap(List<WordCountPair> inputList)
