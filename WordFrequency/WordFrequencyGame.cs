@@ -6,39 +6,31 @@ namespace WordFrequency;
 
 public class WordFrequencyGame
 {
-    private static string SplitInputString(string inputStr, out string[] arr)
+    private static string[] SplitInputString(string inputStr)
     {
-        arr = Regex.Split(inputStr, @"\s+");
+        string[] arr = Regex.Split(inputStr, @"\s+");
         if (arr.Length == 1)
         {
-            return $"{arr[0]} 1";
+            return new string[] { $"{arr[0]} 1" };
         }
 
-        return "";
+        return arr;
 
     }
     public string GetResult(string inputStr)
     {
 
         
-        string[] arr;
-        SplitInputString(inputStr, out arr);
+        
+        string[] splitedInput = SplitInputString(inputStr);
 
-        List<WordCount>wordCounts = arr.Select(s => new WordCount(s, 1)).ToList(); ;
+        List<WordCount>wordCounts = splitedInput.Select(s => new WordCount(s, 1)).ToList(); ;
 
-        //foreach (var s in arr)
-        //{
-        //    wordCounts.Add(new WordCount(s, 1));
-        //}
-
+        
         // Get the map for the next step of sizing the same word
         Dictionary<string, int> wordCountMap = GetWordCountMap(wordCounts);
 
-        //List<WordCount> resultList = new List<WordCount>();
-        //foreach (var entry in wordCountMap)
-        //{
-        //    resultList.Add(new WordCount(entry.Key, entry.Value));
-        //}
+       
         List<WordCount> resultList = wordCountMap.Select(entry => new WordCount(entry.Key, entry.Value)).ToList();
 
         resultList.Sort((w1, w2) => w2.Count - w1.Count);
