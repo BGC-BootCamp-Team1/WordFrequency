@@ -10,12 +10,12 @@ namespace WordFrequency
 
         public string CalculateWordFrequency(string inputText)
         {
-            List<Word> inputList = SplitInputStr(inputText);
-            Dictionary<string, int> map = GetListMap(inputList);
-            inputList = ConvertMapToList(map);
-            SortInputList(inputList);
+            List<Word> wordList = SplitInputStr(inputText);
+            Dictionary<string, int> wordMap = GetListMap(wordList);
+            wordList = ConvertMapToList(wordMap);
+            SortInputList(wordList);
 
-            return BuildResultString(inputList);
+            return BuildResultString(wordList);
 
         }
 
