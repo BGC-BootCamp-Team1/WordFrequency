@@ -11,7 +11,7 @@ namespace WordFrequency
 
             var wordFrequencyList = splitWordsList
                 .GroupBy(word => word)
-                .Select(group => new WordFrequency(group.Key, group.Count()))
+                .Select(group => new WordCount(group.Key, group.Count()))
                 .ToList();
 
             wordFrequencyList.Sort((w1, w2) => w2.Frequency - w1.Frequency);

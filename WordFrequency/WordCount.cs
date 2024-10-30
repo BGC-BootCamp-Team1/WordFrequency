@@ -1,12 +1,12 @@
 ﻿
 namespace WordFrequency
 {
-    public class WordFrequency
+    public class WordCount
     {
         public string Word { get; private set; }
         public int Frequency { get; private set; }
 
-        public WordFrequency(string word, int frequency)
+        public WordCount(string word, int frequency)
         {
             this.Word = word;
             this.Frequency = frequency;
