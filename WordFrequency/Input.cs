@@ -1,4 +1,5 @@
-﻿namespace WordFrequency
+﻿
+namespace WordFrequency
 {
     public class Input
     {
@@ -19,6 +20,11 @@
         public int WordCount
         {
             get { return this.count; }
+        }
+
+        internal void AddOneCount()
+        {
+            this.count++;
         }
     }
 }
