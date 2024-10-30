@@ -9,7 +9,7 @@ public class WordFrequencyGame
     public string GetResult(string inputStr)
     {
 
-        string[] splitedInput = SplitInputString(inputStr);
+        string[] splitedInput = Regex.Split(inputStr, @"\s+");
 
         List<WordCount> wordCounts = splitedInput.Select(s => new WordCount(s, 1)).ToList(); ;
 
@@ -23,17 +23,7 @@ public class WordFrequencyGame
 
     }
 
-    private static string[] SplitInputString(string inputStr)
-    {
-        string[] arr = Regex.Split(inputStr, @"\s+");
-        if (arr.Length == 1)
-        {
-            return new string[] { $"{arr[0]} 1" };
-        }
-
-        return arr;
-
-    }
+    
 
     private List<WordCount> TransformToOutputList(List<WordCount> wordCounts)
     {
