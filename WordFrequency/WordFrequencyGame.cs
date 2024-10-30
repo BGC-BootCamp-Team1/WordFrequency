@@ -6,9 +6,11 @@ namespace WordFrequency
 {
     public class WordFrequencyGame
     {
+        private const string SPLIT_PATTERN = @"\s+";
+
         public string GetResult(string inputStr)
         {
-            if (Regex.Split(inputStr, @"\s+").Length == 1)
+            if (Regex.Split(inputStr, SPLIT_PATTERN).Length == 1)
             {
                 return inputStr + " 1";
             }
@@ -46,7 +48,7 @@ namespace WordFrequency
         private static List<Input> SplitInputStr(string inputStr)
         {
             //split the input string with 1 to n pieces of spaces
-            string[] arr = Regex.Split(inputStr, @"\s+");
+            string[] arr = Regex.Split(inputStr, SPLIT_PATTERN);
 
             List<Input> inputList = new List<Input>();
             foreach (var s in arr)
