@@ -38,16 +38,7 @@ namespace WordFrequency
 
         private static List<Input> ConvertMapToList(Dictionary<string, int> map)
         {
-            List<Input> inputList;
-            List<Input> list = new List<Input>();
-            foreach (var entry in map)
-            {
-                Input input = new Input(entry.Key, entry.Value);
-                list.Add(input);
-            }
-
-            inputList = list;
-            return inputList;
+            return map.Select(entry => new Input(entry.Key, entry.Value)).ToList();
         }
 
         private static List<Input> SplitInputStr(string inputStr)
