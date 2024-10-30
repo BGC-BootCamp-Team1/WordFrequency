@@ -38,14 +38,23 @@ namespace WordFrequency.Tests
             Validate_Input_words_process_to_expected_word(inputStr, expectResult);
         }
 
+        //[Fact]
+        //public void Should_pracess_two_same_words_with_sorted()
+        //{
+        //    //Given
+        //    string inputStr = "the the is";
+        //    string expectResult = "the 2\nis 1";
+        //    Validate_Input_words_process_to_expected_word(inputStr, expectResult);
+        //}
         [Fact]
-        public void Should_pracess_two_same_words_with_sorted()
+        public void Should_process_multiple_same_words_with_sorted()
         {
             //Given
-            string inputStr = "the the is";
-            string expectResult = "the 2\nis 1";
+            string inputStr = "the the the is is the the";
+            string expectResult = "the 5\nis 2";
             Validate_Input_words_process_to_expected_word(inputStr, expectResult);
         }
+
 
         [Fact]
         public void Should_process_sorted_with_count_descending()
