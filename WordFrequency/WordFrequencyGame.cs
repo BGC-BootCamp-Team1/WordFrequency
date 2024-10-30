@@ -24,28 +24,26 @@ public class WordFrequencyGame
         string[] arr;
         SplitInputString(inputStr, out arr);
 
-        List<WordCount>wordCounts = new List<WordCount>();
-        foreach (var s in arr)
-        {
-            wordCounts.Add(new WordCount(s, 1));
-        }
+        List<WordCount>wordCounts = arr.Select(s => new WordCount(s, 1)).ToList(); ;
+
+        //foreach (var s in arr)
+        //{
+        //    wordCounts.Add(new WordCount(s, 1));
+        //}
 
         // Get the map for the next step of sizing the same word
         Dictionary<string, int> wordCountMap = GetWordCountMap(wordCounts);
 
-        List<WordCount> resultList = new List<WordCount>();
-        foreach (var entry in wordCountMap)
-        {
-            resultList.Add(new WordCount(entry.Key, entry.Value));
-        }
+        //List<WordCount> resultList = new List<WordCount>();
+        //foreach (var entry in wordCountMap)
+        //{
+        //    resultList.Add(new WordCount(entry.Key, entry.Value));
+        //}
+        List<WordCount> resultList = wordCountMap.Select(entry => new WordCount(entry.Key, entry.Value)).ToList();
 
         resultList.Sort((w1, w2) => w2.Count - w1.Count);
 
-        List<string> strList = new List<string>();
-        foreach (WordCount wc in resultList)
-        {
-            strList.Add($"{wc.Word} {wc.Count}");
-        }
+        List<string> strList = resultList.Select(wc => $"{wc.Word} {wc.Count}").ToList();
 
         return string.Join("\n", strList);
 
