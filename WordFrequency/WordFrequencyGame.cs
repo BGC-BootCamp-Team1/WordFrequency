@@ -18,6 +18,12 @@ namespace WordFrequency
 
             inputList.Sort((w1, w2) => w2.WordCount - w1.WordCount);
 
+            return BuildResultString(inputList);
+
+        }
+
+        private static string BuildResultString(List<Input> inputList)
+        {
             List<string> strList = new List<string>();
 
             //stringJoiner joiner = new stringJoiner("\n");
@@ -28,7 +34,6 @@ namespace WordFrequency
             }
 
             return string.Join("\n", strList.ToArray());
-
         }
 
         private static List<Input> ConvertMapToList(Dictionary<string, int> map)
