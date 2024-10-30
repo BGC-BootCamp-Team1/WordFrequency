@@ -6,7 +6,8 @@ namespace WordFrequency
     {
         public string GetResult(string inputStr)
         {
-            string[] splitWordsList = Regex.Split(inputStr, @"\s+");
+            const string SPLIT_PATTERN = @"\s+";
+            string[] splitWordsList = Regex.Split(inputStr, SPLIT_PATTERN);
 
             var wordFrequencyList = splitWordsList
                 .GroupBy(word => word)
