@@ -25,16 +25,7 @@ namespace WordFrequency
 
             wordFrequencyList.Sort((w1, w2) => w2.Frequency - w1.Frequency);
 
-            List<string> outputStr = new List<string>();
-
-            //stringJoiner joiner = new stringJoiner("\n");
-            foreach (WordFrequency w in wordFrequencyList)
-            {
-                string s = w.Word + " " + w.Frequency;
-                outputStr.Add(s);
-            }
-
-            return string.Join("\n", outputStr.ToArray());
+            return string.Join("\n", wordFrequencyList);
         }
 
     }

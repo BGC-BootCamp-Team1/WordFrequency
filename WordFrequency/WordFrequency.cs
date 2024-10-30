@@ -16,5 +16,10 @@ namespace WordFrequency
         {
             this.Frequency++;
         }
+
+        public override string ToString()
+        {
+            return this.Word + " " + this.Frequency; ;
+        }
     }
 }
