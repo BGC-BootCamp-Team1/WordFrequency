@@ -4,17 +4,17 @@ namespace WordFrequency
     public class WordCount
     {
         public string Word { get; private set; }
-        public int Frequency { get; private set; }
+        public int Count { get; private set; }
 
-        public WordCount(string word, int frequency)
+        public WordCount(string word, int count)
         {
             this.Word = word;
-            this.Frequency = frequency;
+            this.Count = count;
         }
 
         public override string ToString()
         {
-            return this.Word + " " + this.Frequency; ;
+            return this.Word + " " + this.Count; ;
         }
     }
 }
