@@ -1,8 +1,8 @@
 ﻿namespace WordFrequency
 {
-    public class Input
+    public class Word
     {
-        public Input(string value, int count)
+        public Word(string value, int count)
         {
             Value = value;
             WordCount = count;
