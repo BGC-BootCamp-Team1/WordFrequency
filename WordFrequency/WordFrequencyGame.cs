@@ -53,16 +53,9 @@ namespace WordFrequency
         private static List<Input> SplitInputStr(string inputStr)
         {
             //split the input string with 1 to n pieces of spaces
-            string[] arr = Regex.Split(inputStr, SPLIT_PATTERN);
-
-            List<Input> inputList = new List<Input>();
-            foreach (var s in arr)
-            {
-                Input input = new Input(s, 1);
-                inputList.Add(input);
-            }
-
-            return inputList;
+            return Regex.Split(inputStr, SPLIT_PATTERN)
+            .Select(word => new Input(word, 1))
+            .ToList();
         }
 
         private Dictionary<string, int> GetListMap(List<Input> inputList)
