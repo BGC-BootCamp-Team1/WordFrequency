@@ -20,20 +20,15 @@ public class WordFrequencyGame
     public string GetResult(string inputStr)
     {
 
-        
-        
+
+
         string[] splitedInput = SplitInputString(inputStr);
 
-        List<WordCount>wordCounts = splitedInput.Select(s => new WordCount(s, 1)).ToList(); ;
+        List<WordCount> wordCounts = splitedInput.Select(s => new WordCount(s, 1)).ToList(); ;
 
-        
+
         // Get the map for the next step of sizing the same word
-        Dictionary<string, int> wordCountMap = GetWordCountMap(wordCounts);
-
-       
-        List<WordCount> resultList = wordCountMap.Select(entry => new WordCount(entry.Key, entry.Value)).ToList();
-
-        resultList.Sort((w1, w2) => w2.Count - w1.Count);
+        List<WordCount> resultList = TransformToOutputList(wordCounts);
 
         List<string> strList = resultList.Select(wc => $"{wc.Word} {wc.Count}").ToList();
 
@@ -41,7 +36,17 @@ public class WordFrequencyGame
 
     }
 
-    
+    private List<WordCount> TransformToOutputList(List<WordCount> wordCounts)
+    {
+        Dictionary<string, int> wordCountMap = GetWordCountMap(wordCounts);
+
+
+        List<WordCount> resultList = wordCountMap.Select(entry => new WordCount(entry.Key, entry.Value)).ToList();
+
+        resultList.Sort((w1, w2) => w2.Count - w1.Count);
+        return resultList;
+    }
+
 
     private Dictionary<string, int> GetWordCountMap(List<WordCount> wordCounts)
     {
