@@ -10,12 +10,15 @@ namespace WordFrequency
 
         public string CalculateWordFrequency(string inputText)
         {
-            List<Word> wordList = SplitInputStr(inputText);
-            Dictionary<string, int> wordMap = GetListMap(wordList);
-            wordList = ConvertMapToList(wordMap);
-            SortInputList(wordList);
+            var wordList = Regex.Split(inputText, SPLIT_PATTERN);
+            var wordFrequencyList = wordList
+                .GroupBy(word => word)
+                .Select(group => new Word(group.Key,group.Count()))
+                .ToList();
 
-            return BuildResultString(wordList);
+            SortInputList(wordFrequencyList);
+
+            return BuildResultString(wordFrequencyList);
 
         }
 
@@ -29,23 +32,6 @@ namespace WordFrequency
             return string.Join("\n", inputList.Select(w => $"{w.Value} {w.WordCount}"));
         }
 
-        private static List<Word> ConvertMapToList(Dictionary<string, int> map)
-        {
-            return map.Select(entry => new Word(entry.Key, entry.Value)).ToList();
-        }
 
-        private static List<Word> SplitInputStr(string inputStr)
-        {
-            return Regex.Split(inputStr, SPLIT_PATTERN)
-            .Select(word => new Word(word, 1))
-            .ToList();
-        }
-
-        private Dictionary<string, int> GetListMap(List<Word> inputList)
-        {
-            return inputList
-            .GroupBy(input => input.Value)
-            .ToDictionary(group => group.Key, group => group.Count());
-        }
     }
 }
